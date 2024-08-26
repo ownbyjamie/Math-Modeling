@@ -67,9 +67,9 @@ void setInitailConditions()
 	Position.y = 0.0;
 	Position.z = 0.0;
 	
-	Velocity.x = 0.5;
-	Velocity.y = 0.5;
-	Velocity.z = 0.5;
+	Velocity.x = 8.0;
+	Velocity.y = 7.0;
+	Velocity.z = 6.0;
 	
 	Force.x = 0.0;
 	Force.y = 0.0;
@@ -143,6 +143,41 @@ void getForces()
 	Force.x = 0.0;
 	Force.y = 0.0;
 	Force.z = 0.0;
+
+	float k = 2000.0;
+	float halfSide = BoxSideLength/2.0;
+	float SphereRadius = SphereDiameter/2.0;
+
+	if(Position.x > halfSide)
+	{
+		Force.x = Force.x -(Position.x - halfSide)*k;
+	} 
+
+	if(Position.x < -halfSide)
+	{
+		Force.x = Force.x +(halfSide - Position.x)*k;
+	}
+
+	if(Position.y > halfSide)
+	{
+		Force.y = Force.y -(Position.y - halfSide)*k;
+	}
+
+	if(Position.y < -halfSide)
+	{
+		Force.y = Force.y + (halfSide - Position.y)*k;
+	}
+
+	if(Position.z > halfSide)
+	{
+		Force.z = Force.z - (Position.z - halfSide)*k;
+	}
+
+	if(Position.z < -halfSide)
+	{
+		Force.z = Force.z + (halfSide - Position.z)*k;
+	}
+	
 }
 
 void updatePositions()
