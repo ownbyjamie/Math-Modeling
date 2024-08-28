@@ -1,4 +1,4 @@
-//nvcc ballInABoxFixed.cu -o bounce -lglut -lm -lGLU -lGL																													
+//nvcc ballInABoxWallDampingBroken.cu -o bounce -lglut -lm -lGLU -lGL																													
 //To stop hit "control c" in the window you launched it from.
 #include <iostream>
 #include <fstream>
@@ -72,9 +72,9 @@ void setInitailConditions()
 	Position.y = 0.0;
 	Position.z = 0.0;
 	
-	Velocity.x = 50.0;
-	Velocity.y = 50.0;
-	Velocity.z = 50.0;
+	Velocity.x = 11.0;
+	Velocity.y = 10.0;
+	Velocity.z = 10.0;
 	
 	Force.x = 0.0;
 	Force.y = 0.0;
@@ -171,7 +171,7 @@ void getForces()
 	{
 		howMuch = (Position.y + ballRadius) - halfSide;
 		Force.y -= wallStiffness*howMuch;
-		Velocity.x = Velocity.y*damping;
+		Velocity.y = Velocity.y*damping;
 	}
 	
 	if((Position.z - ballRadius) < -halfSide)
@@ -215,7 +215,6 @@ void nBody()
 	updatePositions();
 	drawPicture();
 	printf("\n Time = %f", RunTime);
-	printf("\n Velocity = %f", Velocity.x)t
 	RunTime += Dt;
 	
 	if(TotalRunTime < RunTime)
